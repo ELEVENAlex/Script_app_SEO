@@ -20,41 +20,41 @@ const pageSpeed = async () => {
     }
 
     console.log(links)
-    // let [res] = await pool.query('DELETE FROM carga_pagina')
+    let [res] = await pool.query('DELETE FROM carga_pagina')
 
-    // for (let i = 0; i < links.length; i++) {
-    //     console.log(links[i])
-    //     try {
-    //         const data = await pagespeed.pagespeedapi.runpagespeed({
-    //             key: process.env.GOOGLE_API_KEY,
-    //             url: links[i],
-    //             options: {
-    //                 strategy: 'desktop',
-    //                 category: ['performance']
-    //             }
-    //         })
-    //         const [rows] = await pool.query('INSERT INTO carga_pagina VALUES ("' +
-    //         links[i] + '", ' +
-    //         (data.data.loadingExperience.hasOwnProperty("overall_category") ? '"' + data.data.loadingExperience.overall_category + '"' : 'null' ) + ', ' +
-    //         (data.data.loadingExperience.metrics.hasOwnProperty("CUMULATIVE_LAYOUT_SHIFT_SCORE") ? '"' + data.data.loadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE.category + '"' : 'null' ) + ', ' +
-    //         (data.data.loadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT") ? '"' + data.data.loadingExperience.metrics.EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT.category + '"' : 'null' ) + ', ' +
-    //         (data.data.loadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_TIME_TO_FIRST_BYTE") ? '"' + data.data.loadingExperience.metrics.EXPERIMENTAL_TIME_TO_FIRST_BYTE.category + '"' : 'null' ) + ', ' +
-    //         (data.data.loadingExperience.metrics.hasOwnProperty("FIRST_CONTENTFUL_PAINT_MS") ? '"' + data.data.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.category + '"' : 'null' ) + ', ' +
-    //         (data.data.loadingExperience.metrics.hasOwnProperty("FIRST_INPUT_DELAY_MS") ? '"' + data.data.loadingExperience.metrics.FIRST_INPUT_DELAY_MS.category + '"' : 'null' ) + ', ' +
-    //         (data.data.loadingExperience.metrics.hasOwnProperty("LARGEST_CONTENTFUL_PAINT_MS") ? '"' + data.data.loadingExperience.metrics.EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT.category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.hasOwnProperty("overall_category") ? '"' + data.data.originLoadingExperience.overall_category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.metrics.hasOwnProperty("CUMULATIVE_LAYOUT_SHIFT_SCORE") ? '"' + data.data.originLoadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE.category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT") ? '"' + data.data.originLoadingExperience.metrics.EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT.category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_TIME_TO_FIRST_BYTE") ? '"' + data.data.originLoadingExperience.metrics.EXPERIMENTAL_TIME_TO_FIRST_BYTE.category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.metrics.hasOwnProperty("FIRST_CONTENTFUL_PAINT_MS") ? '"' + data.data.originLoadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.metrics.hasOwnProperty("FIRST_INPUT_DELAY_MS") ? '"' + data.data.originLoadingExperience.metrics.FIRST_INPUT_DELAY_MS.category + '"' : 'null' ) + ', ' +
-    //         (data.data.originLoadingExperience.metrics.hasOwnProperty("LARGEST_CONTENTFUL_PAINT_MS") ? '"' + data.data.originLoadingExperience.metrics.LARGEST_CONTENTFUL_PAINT_MS.category + '"' : 'null' ) + ')'
-    //         )
-    //         //console.log(rows)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    for (let i = 0; i < links.length; i++) {
+        console.log(links[i])
+        try {
+            const data = await pagespeed.pagespeedapi.runpagespeed({
+                key: process.env.GOOGLE_API_KEY,
+                url: links[i],
+                options: {
+                    strategy: 'desktop',
+                    category: ['performance']
+                }
+            })
+            const [rows] = await pool.query('INSERT INTO carga_pagina VALUES ("' +
+            links[i] + '", ' +
+            (data.data.loadingExperience.hasOwnProperty("overall_category") ? '"' + data.data.loadingExperience.overall_category + '"' : 'null' ) + ', ' +
+            (data.data.loadingExperience.metrics.hasOwnProperty("CUMULATIVE_LAYOUT_SHIFT_SCORE") ? '"' + data.data.loadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE.category + '"' : 'null' ) + ', ' +
+            (data.data.loadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT") ? '"' + data.data.loadingExperience.metrics.EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT.category + '"' : 'null' ) + ', ' +
+            (data.data.loadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_TIME_TO_FIRST_BYTE") ? '"' + data.data.loadingExperience.metrics.EXPERIMENTAL_TIME_TO_FIRST_BYTE.category + '"' : 'null' ) + ', ' +
+            (data.data.loadingExperience.metrics.hasOwnProperty("FIRST_CONTENTFUL_PAINT_MS") ? '"' + data.data.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.category + '"' : 'null' ) + ', ' +
+            (data.data.loadingExperience.metrics.hasOwnProperty("FIRST_INPUT_DELAY_MS") ? '"' + data.data.loadingExperience.metrics.FIRST_INPUT_DELAY_MS.category + '"' : 'null' ) + ', ' +
+            (data.data.loadingExperience.metrics.hasOwnProperty("LARGEST_CONTENTFUL_PAINT_MS") ? '"' + data.data.loadingExperience.metrics.EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT.category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.hasOwnProperty("overall_category") ? '"' + data.data.originLoadingExperience.overall_category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.metrics.hasOwnProperty("CUMULATIVE_LAYOUT_SHIFT_SCORE") ? '"' + data.data.originLoadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE.category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT") ? '"' + data.data.originLoadingExperience.metrics.EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT.category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.metrics.hasOwnProperty("EXPERIMENTAL_TIME_TO_FIRST_BYTE") ? '"' + data.data.originLoadingExperience.metrics.EXPERIMENTAL_TIME_TO_FIRST_BYTE.category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.metrics.hasOwnProperty("FIRST_CONTENTFUL_PAINT_MS") ? '"' + data.data.originLoadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.metrics.hasOwnProperty("FIRST_INPUT_DELAY_MS") ? '"' + data.data.originLoadingExperience.metrics.FIRST_INPUT_DELAY_MS.category + '"' : 'null' ) + ', ' +
+            (data.data.originLoadingExperience.metrics.hasOwnProperty("LARGEST_CONTENTFUL_PAINT_MS") ? '"' + data.data.originLoadingExperience.metrics.LARGEST_CONTENTFUL_PAINT_MS.category + '"' : 'null' ) + ')'
+            )
+            //console.log(rows)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return process.exit();
 }
 
