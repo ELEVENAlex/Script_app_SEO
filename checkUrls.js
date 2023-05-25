@@ -2,13 +2,9 @@ const pool = require('./database')
 const { google } = require('googleapis')
 const pagespeed = google.pagespeedonline('v5')
 
-const schedule = require('node-schedule');
+const schedule = require('node-schedule')
 
-// const job = schedule.scheduleJob('0 0 12 * * *', function(){
-//   console.log('The answer to life, the universe, and everything!');
-// });
-
-const job = schedule.scheduleJob('0 5 12 * * *', async () => {
+const pageSpeed = async () => {
     const [paises] = await pool.query('SELECT iso_code FROM paises')
     const [empresas] = await pool.query('SELECT nombre FROM empresas')
     const links = []
@@ -61,6 +57,6 @@ const job = schedule.scheduleJob('0 5 12 * * *', async () => {
             console.log(error)
         }
     }
-})
+}
 
-// pageSpeed()
+pageSpeed()
